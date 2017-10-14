@@ -1,0 +1,36 @@
+{
+  "name": "Acroride_graphQL_API",
+  "version": "1.0.0.SNAPSHOP",
+  "description": "API for acrodide web app",
+  "engines": {
+    "node": "8.4.0"
+  },
+  "main": "server.js",
+  "repository": "www.acroride.com",
+  "author": "AO HyS .- Alejandro Ortiz Corro",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "nodemon --exec \"mocha\" -R nyan"
+  },
+  "dependencies": {
+    "apollo-server-express": "^1.1.6",
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7",
+    "graphql-tools": "^2.5.0",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1"
+  }
+}
