@@ -1,32 +1,24 @@
 const {ObjectID} = require('mongodb');
+const UserController = require('../controllers/UsersController');
 
-let projectId = new ObjectID();
+let userId = new ObjectID();
 
-const testProject = {
-    body:{
-        _id: projectId,
-        name:{
-            es: "Pero hay que barbaridad y yo sin moverme del mismo lugar",
-            en: "Poject number one"
-        },
-        url: "www.algo.com",
-        imageUrl: "www.joder.com",
-        description:{
-            es: "La descripcion no esta tan mal espero pase",
-            en: "The descrioption is not so bad I hope to pass the inspection"
-        },
-        technologies: ["Uno", "Dos", "Tres"]
-    }
+const dummyUser = {
+    _id: userId,
+    name: "Alejandro Ortiz Corro",
+    orgnaization: "AO HyS",
+    phones: ["2299020825", "2292605547"],
+    emails: ["a.ortizcrr@gmail.com", "corrortiz@outlook.com"],
+    type: "ADMIN",
+    password: "2106",
+    percentaje: 100
 };
 
-const populateProject = (done) =>{
-    Project.remove({})
-        .then(() => {
-            let project = new Project(testProject.body).save();
-            return project;
-        }).then(()=>done())
+const createUser = (done) =>{
+    UserController.create(dummyUser)
+        .then(()=>done())
         .catch(err => console.warn(err));
 };
 
 
-module.exports = { testProject, projectId, populateProject };
+module.exports = { userId, dummyUser, createUser };
