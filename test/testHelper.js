@@ -1,9 +1,12 @@
 const {ObjectID} = require('mongodb');
 const UserController = require('../controllers/UsersController');
+const VehicleController = require('../controllers/VehicleController');
 
 const Users = require('../models/Users');
+const Vehicle = require('../models/Vehicle');
 
 let userId = new ObjectID();
+let vehicleID = new ObjectID();
 
 const dummyUser = {
     _id: userId,
@@ -16,6 +19,22 @@ const dummyUser = {
     percentaje: "100"
 };
 
+const dummyVehicle = {
+    _id: vehicleID,
+    name: "Suburban 4",
+    passengers: 4,
+    largeBags: 2,
+    smallBags: 4,
+    doors: 4,
+    type: "Suburbam",
+    status: true,
+    imagesUrls: ["http://lorempixel.com/output/transport-q-c-640-480-4.jpg", "http://lorempixel.com/output/transport-q-c-640-480-6.jpg"],
+    description: {
+       es: "Camioneta 44 muy bonita",
+       en: "44 Truck very pretty "
+    }
+};
+
 const populateUser = (done) =>{
     Users.remove({})
         .then(() => {
@@ -25,4 +44,21 @@ const populateUser = (done) =>{
         .catch(err => done(err));
 };
 
-module.exports = { userId, dummyUser, populateUser};
+
+const populateVehicle = (done) =>{
+    Vehicle.remove({})
+        .then(() => {
+            let vehicle = new Vehicle(dummyVehicle).save();
+            return vehicle;
+        }).then(()=>done())
+        .catch(err => done(err));
+};
+
+module.exports = { 
+    userId, 
+    dummyUser, 
+    populateUser,
+    dummyVehicle,
+    vehicleID,
+    populateVehicle
+};

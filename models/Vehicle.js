@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-mongoose.Promise = require('axios');
 const Schema = mongoose.Schema;
 
 const VehicleSchema = new Schema({
+  name: String,
   passengers: Number,
   largeBags: Number,
   smallBags: Number,
