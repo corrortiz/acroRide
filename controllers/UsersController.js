@@ -19,5 +19,8 @@ module.exports = {
    },
    find(_id){
       return Users.findById(_id);
+   },
+   findAll(){
+      return Users.find({});
    }
 };

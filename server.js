@@ -2,6 +2,8 @@ require('./config/config');
 //Express
 const express = require('express');
 const bodyParser = require('body-parser');
+//Mongose CONFIG
+const {mongoose} = require('./db/mongoose');
 //GraphQL
 const {graphqlExpress, graphiqlExpress} = require('apollo-server-express');
 

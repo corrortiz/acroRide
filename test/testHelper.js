@@ -1,6 +1,8 @@
 const {ObjectID} = require('mongodb');
 const UserController = require('../controllers/UsersController');
 
+const Users = require('../models/Users');
+
 let userId = new ObjectID();
 
 const dummyUser = {
@@ -11,14 +13,16 @@ const dummyUser = {
     emails: ["a.ortizcrr@gmail.com", "corrortiz@outlook.com"],
     type: "ADMIN",
     password: "2106",
-    percentaje: 100
+    percentaje: "100"
 };
 
-const createUser = (done) =>{
-    UserController.create(dummyUser)
-        .then(()=>done())
-        .catch(err => console.warn(err));
+const populateUser = (done) =>{
+    Users.remove({})
+        .then(() => {
+            let user = new Users(dummyUser).save();
+            return user;
+        }).then(()=>done())
+        .catch(err => done(err));
 };
 
-
-module.exports = { userId, dummyUser, createUser };
+module.exports = { userId, dummyUser, populateUser};

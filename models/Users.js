@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const UsersSchema = new Schema({
@@ -9,7 +8,7 @@ const UsersSchema = new Schema({
   emails: [String],
   type: String,
   password: String,
-  percentaje: Number
+  percentaje: String
 });
 
 const Users = mongoose.model('users', UsersSchema);
