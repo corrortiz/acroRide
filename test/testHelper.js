@@ -1,12 +1,19 @@
-const {ObjectID} = require('mongodb');
+const { ObjectID } = require('mongodb');
+const moment = require('moment');
 const UserController = require('../controllers/UsersController');
 const VehicleController = require('../controllers/VehicleController');
+const BudgetController = require('../controllers/BudgetController');
+const TravelController = require('../controllers/TravelController');
 
 const Users = require('../models/Users');
 const Vehicle = require('../models/Vehicle');
+const Budget = require('../models/Budget');
+const Travel = require('../models/Travel');
 
 let userId = new ObjectID();
 let vehicleID = new ObjectID();
+let budgetID = new ObjectID();
+let travelID = new ObjectID();
 
 const dummyUser = {
     _id: userId,
@@ -30,35 +37,103 @@ const dummyVehicle = {
     status: true,
     imagesUrls: ["http://lorempixel.com/output/transport-q-c-640-480-4.jpg", "http://lorempixel.com/output/transport-q-c-640-480-6.jpg"],
     description: {
-       es: "Camioneta 44 muy bonita",
-       en: "44 Truck very pretty "
+        es: "Camioneta 44 muy bonita",
+        en: "44 Truck very pretty "
     }
 };
 
-const populateUser = (done) =>{
+const dummyBudget = {
+    _id: budgetID,
+    finalTotalCost: {
+        es: "200 Pesos",
+        en: "20 Dolars"
+    },
+    budgetTotalCost: {
+        es: "150 Pesos",
+        en: "10 Dolars"
+    },
+    destinoInicial: "Veracruz",
+    destinoFinal: "Puebla",
+    tiempoAproximado: 250,
+    distancia: 150,
+    tollCost: 100.00,
+    tolls: ["minantla", "puebla"],
+    budgetDate: moment().format(),
+    aprove: true,
+    User: dummyUser,
+    Vehicle: dummyVehicle
+};
+
+const dummyTravel = {
+    _id: travelID,
+    finalTotalCost: {
+        es: "200 Pesos",
+        en: "20 Dolars"
+    },
+    budgetTotalCost: {
+        es: "150 Pesos",
+        en: "10 Dolars"
+    },
+    destinoInicial: "Veracruz",
+    destinoFinal: "Puebla",
+    tiempoAproximado: 250,
+    distancia: 150,
+    tollCost: 100.00,
+    tolls: ["minantla", "puebla"],
+    budgetDate: moment().format(),
+    User: dummyUser,
+    Vehicle: dummyVehicle
+};
+
+const populateUser = (done) => {
     Users.remove({})
         .then(() => {
             let user = new Users(dummyUser).save();
             return user;
-        }).then(()=>done())
+        }).then(() => done())
         .catch(err => done(err));
 };
 
 
-const populateVehicle = (done) =>{
+const populateVehicle = (done) => {
     Vehicle.remove({})
         .then(() => {
             let vehicle = new Vehicle(dummyVehicle).save();
             return vehicle;
-        }).then(()=>done())
+        }).then(() => done())
         .catch(err => done(err));
 };
 
-module.exports = { 
-    userId, 
-    dummyUser, 
+
+const populateBudget = (done) => {
+    Budget.remove({})
+        .then(() => {
+            let budget = new Budget(dummyBudget).save();
+            return budget;
+        }).then(() => done())
+        .catch(err => done(err));
+};
+
+const populateTravel = (done) => {
+    Travel.remove({})
+        .then(() => {
+            let travel = new Travel(dummyTravel).save();
+            return travel;
+        }).then(() => done())
+        .catch(err => done(err));
+};
+
+module.exports = {
+    userId,
+    dummyUser,
     populateUser,
     dummyVehicle,
     vehicleID,
-    populateVehicle
+    populateVehicle,
+    dummyBudget,
+    budgetID,
+    populateBudget,
+    dummyTravel,
+    travelID,
+    populateTravel
 };

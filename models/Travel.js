@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const User = require('./Users');
-const Vehicle = require('./Vehicle');
-
 const TravelSchema = new Schema({
    finalTotalCost: {
       es: String,
@@ -20,9 +17,14 @@ const TravelSchema = new Schema({
    tollCost: Number,
    tolls: [String],
    actualDate: Date,
-   aprove: Boolean,
-   User: User,
-   Vehicle: Vehicle
+   User: {
+      type: Schema.Types.ObjectId,
+      ref: 'users'
+   },
+   Vehicle: {
+      type: Schema.Types.ObjectId,
+      ref: 'vehicle'
+   }
 });
 
 const Travel = mongoose.model('travel', TravelSchema);

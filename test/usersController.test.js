@@ -13,7 +13,7 @@ const newUserId = new ObjectID();
 
 beforeEach(populateUser);
 
-describe.only('USER CONTROLLER CRUD TEST', () => {
+describe('USER CONTROLLER CRUD TEST', () => {
    it('should create a user', (done) => { 
       const newUser = new Users(dummyUser);
       newUser._id = newUserId;

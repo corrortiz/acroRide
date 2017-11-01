@@ -13,7 +13,7 @@ const newVehicleID = new ObjectID();
 
 beforeEach(populateVehicle);
 
-describe.only('VEHICLE CONTROLLER CRUD TEST', () => {
+describe('VEHICLE CONTROLLER CRUD TEST', () => {
    it('should create a vehicle', (done) => { 
       const newVehicle = new Vehicle(dummyVehicle);
       newVehicle._id = newVehicleID;
