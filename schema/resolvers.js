@@ -1,21 +1,23 @@
+const UsersController = require('./../controllers/UsersController');
+
 module.exports = {
    Query: {
-      allProjects: () => {
-         return {kiri: "kiri"};  
+      allUsers: () => {
+         return UsersController.findAll();  
       },
-      aProject: (_, {id}) => {
-        return {kiri: "kiri"};
+      aUser: (_, {id}) => {
+        return UsersController.find(id);
       }
    },
    Mutation: {
-      addProject: (_, {data}) =>{
-         return {kiri: "kiri"};  
+      addUser: (_, {data}) =>{
+         return UsersController.create(data);  
       },
-      deleteProject: (_, {id}) =>{
-        return {kiri: "no mames"};
+      deleteUser: (_, {id}) =>{
+        return UsersController.delete(id);
       },
-      modifyProject: (_, {data, id}) =>{
-        return {nomames: "que pendejada"};
+      modifyUser: (_, {data, id}) =>{
+        return UsersController.edit(id, data);
       },
    }
  };

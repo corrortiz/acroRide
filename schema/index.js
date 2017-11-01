@@ -3,51 +3,33 @@ const resolvers = require('./resolvers');
 
 const typeDefs = `
    type Query {
-      allProjects: [Project]
-      aProject(id: ID!): Project 
+      allUsers: [User]
+      aUser(id: ID!): User 
    }
 
-   type ProjectName{
-      es: String
-      en: String
-   }
-
-   type ProjectDescription{
-      es: String
-      en: String
-   }
-
-   type Project {
+   type User {
       _id: ID!
-      url: String
-      imageUrl: String
-      technologies: [String]
-      name: ProjectName
-      description: ProjectDescription
+      organization: String,
+      phones: [String],
+      emails: [String],
+      type: String,
+      password: String,
+      percentaje: String
    }
 
-   input nameInput{
-      es: String
-      en: String
-   }
-
-   input descriptionInput{
-      es: String
-      en: String
-   }
-
-   input ProjectInput {
-      url: String
-      imageUrl: String
-      technologies: [String]
-      name: nameInput
-      description: descriptionInput
+   input UserInput {
+      organization: String,
+      phones: [String],
+      emails: [String],
+      type: String,
+      password: String,
+      percentaje: String
    }
 
    type Mutation {
-      addProject(data: ProjectInput): Project
-      modifyProject(data: ProjectInput, id: ID!): Project
-      deleteProject(id: ID!): Project
+      addUser(data: UserInput): User
+      modifyUser(data: UserInput, id: ID!): User
+      deleteUser(id: ID!): User
    }
 `;
 
