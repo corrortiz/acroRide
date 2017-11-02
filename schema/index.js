@@ -9,6 +9,7 @@ const typeDefs = `
 
    type User {
       _id: ID!
+      name: String,
       organization: String,
       phones: [String],
       emails: [String],
@@ -18,6 +19,7 @@ const typeDefs = `
    }
 
    input UserInput {
+      name: String,
       organization: String,
       phones: [String],
       emails: [String],

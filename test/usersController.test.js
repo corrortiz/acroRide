@@ -51,20 +51,23 @@ describe('USER CONTROLLER CRUD TEST', () => {
    });
    
    it('should modify a user find by a id', (done) => {
-      var newName = {name: 'Alfredo Ortiz Muñoz'};
-      UsersController.edit(userId, newName).then((res)=>{
-         res.should.be.a('object');
-         res.should.have.property('ok');
-         res.ok.should.equal(1);
-         done();
+      var newName = {name: 'Alfredo Ortiz'};
+      UsersController.edit(userId, newName)
+         .then((res)=>{
+            UsersController.find(userId).then((user)=>{
+               user.should.be.a('object');
+               user.should.have.property('name');
+               user.name.should.equal(newName.name);
+               done();
+            }).catch((err) => done(err));
       }).catch((err) => done(err));
    });
 
    it('should delete a user find by a id', (done) => {
       UsersController.delete(userId).then((res)=>{
          res.should.be.a('object');
-         res.should.have.property('result');
-         res.result.ok.should.equal(1);
+         res.should.have.property('name');
+         res.name.should.equal('Alejandro Ortiz Corro');
          done();
       }).catch((err) => done(err));
    });

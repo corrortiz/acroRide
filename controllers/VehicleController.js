@@ -3,19 +3,13 @@ const Vehicle = require('../models/Vehicle');
 module.exports = {
    create(vehicleProps){
       const vehicle = new Vehicle(vehicleProps);
-      vehicle.save(function(err, vehicle){
-         if(err){
-            return {error: "Something went wrong creating a vehicle"};
-         }else{
-            return vehicle;
-         }
-      });
+      return vehicle.save();
    },
    delete(_id){
-      return Vehicle.remove({_id});
+      return Vehicle.findByIdAndRemove({_id});
    },
    edit(_id, vehicleProps){
-      return Vehicle.update({_id}, vehicleProps);
+      return Vehicle.findByIdAndUpdate({_id}, vehicleProps);
    },
    find(_id){
       return Vehicle.findById(_id);

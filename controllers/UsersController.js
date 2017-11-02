@@ -6,10 +6,10 @@ module.exports = {
       return user.save();
    },
    delete(_id){
-      return Users.remove({_id});
+      return Users.findByIdAndRemove({_id});
    },
    edit(_id, userProps){
-      return Users.update({_id}, userProps);
+      return Users.findByIdAndUpdate({_id}, userProps);
    },
    find(_id){
       return Users.findById(_id);
