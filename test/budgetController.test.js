@@ -6,7 +6,7 @@ const expecte = chai.expect;
 const BudgetController = require('../controllers/BudgetController');
 const Budget = require('../models/Budget');
 
-const { dummyBudget, budgetID, populateBudget} = require('./testHelper');
+const { dummyBudget, budgetID, populateBudget, userId, vehicleID} = require('./testHelper');
 //ID for the mock budget
 const {ObjectID} = require('mongodb');
 const newBudgetID = new ObjectID();
@@ -50,12 +50,30 @@ describe('BUDGET CONTROLLER CRUD TEST', () => {
       }).catch((err) => done(err));
    });
    
+   it('should find all budgets by User id', (done) => {
+      BudgetController.findAllByUser(userId).then((res)=>{
+         res.should.be.a('array');
+         res[0].should.have.property('aprove');
+         res[0].aprove.should.equal(dummyBudget.aprove);
+         done();
+      }).catch((err) => done(err));
+   });
+
+   it('should find all budgets by Vehicle id', (done) => {
+      BudgetController.findAllByVehicle(vehicleID).then((res)=>{
+         res.should.be.a('array');
+         res[0].should.have.property('aprove');
+         res[0].aprove.should.equal(dummyBudget.aprove);
+         done();
+      }).catch((err) => done(err));
+   });
+
    it('should modify a budget find by a id', (done) => {
       var newName = {destinoFinal: 'Alfredo Ortiz Muñoz'};
       BudgetController.edit(budgetID, newName).then((res)=>{
          res.should.be.a('object');
-         res.should.have.property('ok');
-         res.ok.should.equal(1);
+         res.should.have.property('aprove');
+         res.aprove.should.equal(dummyBudget.aprove);
          done();
       }).catch((err) => done(err));
    });
@@ -63,8 +81,8 @@ describe('BUDGET CONTROLLER CRUD TEST', () => {
    it('should delete a budget find by a id', (done) => {
       BudgetController.delete(budgetID).then((res)=>{
          res.should.be.a('object');
-         res.should.have.property('result');
-         res.result.ok.should.equal(1);
+         res.should.have.property('aprove');
+         res.aprove.should.equal(dummyBudget.aprove);
          done();
       }).catch((err) => done(err));
    });
