@@ -39,7 +39,6 @@ describe('VEHICLE CONTROLLER CRUD TEST', () => {
          done();
       }).catch((err) => done(err));
    });
-
    
    it('should find a vehicle by id', (done) => {
       VehicleController.find(vehicleID).then((res)=>{

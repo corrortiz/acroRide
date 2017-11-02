@@ -17,8 +17,8 @@ describe('USERS SCHEMA CRUD', () => {
          .send({'query': `
             query allUsers{
                allUsers{
-               name
-               organization
+                  name
+                  organization
                }
             }
          `})
