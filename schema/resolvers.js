@@ -1,6 +1,7 @@
 const UsersController = require('./../controllers/UsersController');
 const VehicleController = require('./../controllers/VehicleController');
 const BudgetController = require('./../controllers/BudgetController');
+const TravelController = require('./../controllers/TravelController');
 
 module.exports = {
    Query: {
@@ -29,6 +30,19 @@ module.exports = {
       },
       aBudget: (_, {id}) => {
         return BudgetController.find(id);
+      },
+
+      allTravels: () => {
+        return TravelController.findAll();
+      },
+      allTravelsByUser: (_, {userId}) => {
+        return TravelController.findAllByUser(userId);
+      },
+      allTravelsByVehicle: (_, {vehicleId}) => {
+        return TravelController.findAllByVehicle(vehicleId);
+      },
+      aTravel: (_, {id}) => {
+        return TravelController.find(id);
       }, 
    },
    Mutation: {
@@ -60,6 +74,16 @@ module.exports = {
       },
       modifyBudget: (_, {data, id}) =>{
         return BudgetController.edit(id, data);
+      },
+
+      addTravel: (_, {data}) =>{
+        return TravelController.create(data);  
+      },
+      deleteTravel: (_, {id}) =>{
+        return TravelController.delete(id);
+      },
+      modifyTravel: (_, {data, id}) =>{
+        return TravelController.edit(id, data);
       },
     },
     //This code saves the scalar type os Date found in this thred

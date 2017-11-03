@@ -15,6 +15,11 @@ const typeDefs = `
       allBudgetsByUser(userId: ID!): [Budget]
       allBudgetsByVehicle(vehicleId: ID!): [Budget]
       aBudget(id: ID!): Budget
+
+      allTravels: [Travel]
+      allTravelsByUser(userId: ID!): [Travel]
+      allTravelsByVehicle(vehicleId: ID!): [Travel]
+      aTravel(id: ID!): Travel
    }
 
    type User {
@@ -68,6 +73,21 @@ const typeDefs = `
       tolls: [String],
       budgetDate: Date,
       aprove: Boolean,
+      User: User,
+      Vehicle: Vehicle
+   }
+
+   type Travel {
+      _id: ID!
+      finalTotalCost: FinalTotalCost,
+      budgetTotalCost: BudgetTotalCost,
+      destinoInicial: String,
+      destinoFinal: String,
+      tiempoAproximado: Float,
+      distancia: Float,
+      tollCost: Float,
+      tolls: [String],
+      actualDate: Date,
       User: User,
       Vehicle: Vehicle
    }
@@ -126,6 +146,20 @@ const typeDefs = `
       Vehicle: VehicleInput
    }
 
+   input TravelInput {
+      finalTotalCost: FinalTotalCostInput,
+      budgetTotalCost: BudgetTotalCostInput,
+      destinoInicial: String,
+      destinoFinal: String,
+      tiempoAproximado: Float,
+      distancia: Float,
+      tollCost: Float,
+      tolls: [String],
+      actualDate: Date,
+      User: UserInput,
+      Vehicle: VehicleInput
+   }
+
    type Mutation {
       addUser(data: UserInput): User
       modifyUser(data: UserInput, id: ID!): User
@@ -138,6 +172,10 @@ const typeDefs = `
       addBudget(data: BudgetInput): Budget
       modifyBudget(data: BudgetInput, id: ID!): Budget
       deleteBudget(id: ID!): Budget
+     
+      addTravel(data: TravelInput): Travel
+      modifyTravel(data: TravelInput, id: ID!): Travel
+      deleteTravel(id: ID!): Travel
    }
 `;
 

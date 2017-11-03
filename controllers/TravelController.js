@@ -3,24 +3,46 @@ const Travel = require('../models/Travel');
 module.exports = {
    create(travelProps){
       const travel = new Travel(travelProps);
-      travel.save(function(err, travel){
-         if(err){
-            return {error: "Something went wrong creating a travel"};
-         }else{
-            return travel;
-         }
-      });
+      return travel.save()
+         .then(res => Travel.findById(res._id)
+                              .populate('User')
+                              .populate('Vehicle')
+                              .exec());
    },
    delete(_id){
-      return Travel.remove({_id});
+      return Travel.findByIdAndRemove({_id})
+                     .populate('User')
+                     .populate('Vehicle')
+                     .exec();
    },
    edit(_id, travelProps){
-      return Travel.update({_id}, travelProps);
+      return Travel.findByIdAndUpdate({_id}, travelProps)
+                     .populate('User')
+                     .populate('Vehicle')
+                     .exec();
    },
    find(_id){
-      return Travel.findById(_id);
+      return Travel.findById(_id)
+                     .populate('User')
+                     .populate('Vehicle')
+                     .exec();
    },
    findAll(){
-      return Travel.find({});
-   }
+      return Travel.find({})
+                     .populate('User')
+                     .populate('Vehicle')
+                     .exec();
+   },
+   findAllByUser(userId){
+      return Travel.find({User: userId})
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
+   },
+   findAllByVehicle(vehicleID){
+      return Travel.find({Vehicle: vehicleID})
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
+   },
 };

@@ -6,7 +6,7 @@ const expecte = chai.expect;
 const TravelController = require('../controllers/TravelController');
 const Travel = require('../models/Travel');
 
-const { dummyTravel, travelID, populateTravel} = require('./testHelper');
+const { dummyTravel, travelID, populateTravel, userId, vehicleID} = require('./testHelper');
 //ID for the mock travel
 const {ObjectID} = require('mongodb');
 const newTravelID = new ObjectID();
@@ -49,13 +49,31 @@ describe('TRAVEL CONTROLLER CRUD TEST', () => {
          done();
       }).catch((err) => done(err));
    });
+
+   it('should find all travels by User id', (done) => {
+      TravelController.findAllByUser(userId).then((res)=>{
+         res.should.be.a('array');
+         res[0].should.have.property('destinoFinal');
+         res[0].destinoFinal.should.equal(dummyTravel.destinoFinal);
+         done();
+      }).catch((err) => done(err));
+   });
+
+   it('should find all travels by Vehicle id', (done) => {
+      TravelController.findAllByVehicle(vehicleID).then((res)=>{
+         res.should.be.a('array');
+         res[0].should.have.property('destinoFinal');
+         res[0].destinoFinal.should.equal(dummyTravel.destinoFinal);
+         done();
+      }).catch((err) => done(err));
+   });
    
    it('should modify a travel find by a id', (done) => {
       var newName = {destinoFinal: 'Alfredo Ortiz Muñoz'};
       TravelController.edit(travelID, newName).then((res)=>{
          res.should.be.a('object');
-         res.should.have.property('ok');
-         res.ok.should.equal(1);
+         res.should.have.property('destinoFinal');
+         res.destinoFinal.should.equal(dummyTravel.destinoFinal);
          done();
       }).catch((err) => done(err));
    });
@@ -63,8 +81,8 @@ describe('TRAVEL CONTROLLER CRUD TEST', () => {
    it('should delete a travel find by a id', (done) => {
       TravelController.delete(travelID).then((res)=>{
          res.should.be.a('object');
-         res.should.have.property('result');
-         res.result.ok.should.equal(1);
+         res.should.have.property('destinoFinal');
+         res.destinoFinal.should.equal(dummyTravel.destinoFinal);
          done();
       }).catch((err) => done(err));
    });
