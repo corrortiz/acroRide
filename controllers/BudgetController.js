@@ -6,35 +6,47 @@ module.exports = {
    create(budgetProps){
       const budget = new Budget(budgetProps);
       return budget.save().then((res)=>{
-               Budget.findById(res._id)
+            return Budget.findById(res._id)
                   .populate('User')
                   .populate('Vehicle')
-                  .exec((err, newBudget)=> {
-                     return newBudget;
-                  });
+                  .exec();
             });
       
    },
-   create2(budgetProps){
-      const budget = new Budget(budgetProps);
-      return budget.save();
-   },
    delete(_id){
-      return Budget.findByIdAndRemove({_id});
+      return Budget.findByIdAndRemove({_id})
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
    },
    edit(_id, budgetProps){
-      return Budget.findByIdAndUpdate({_id}, budgetProps);
+      return Budget.findByIdAndUpdate({_id}, budgetProps)
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
    },
    find(_id){
-      return Budget.findById(_id);
+      return Budget.findById(_id)
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
    },
    findAll(){
-      return Budget.find({});
+      return Budget.find({})
+                  .populate('User')
+                  .populate('Vehicle')
+                  .exec();
    },
    findAllByUser(userId){
-      return Budget.find({User: userId});
+      return Budget.find({User: userId})
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
    },
    findAllByVehicle(vehicleId){
-      return Budget.find({Vehicle: vehicleId});
+      return Budget.find({Vehicle: vehicleId})
+                        .populate('User')
+                        .populate('Vehicle')
+                        .exec();
    },
 };
