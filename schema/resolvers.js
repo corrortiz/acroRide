@@ -10,12 +10,14 @@ module.exports = {
       aUser: (_, {id}) => {
         return UsersController.find(id);
       },
+
       allVehicles: () => {
          return VehicleController.findAll();  
       },
       aVehicle: (_, {id}) => {
         return VehicleController.find(id);
       },
+
       allBudgets: () => {
         return BudgetController.findAll();
       },
@@ -39,6 +41,7 @@ module.exports = {
       modifyUser: (_, {data, id}) =>{
         return UsersController.edit(id, data);
       },
+
       addVehicle: (_, {data}) =>{
          return VehicleController.create(data);  
       },
@@ -47,6 +50,16 @@ module.exports = {
       },
       modifyVehicle: (_, {data, id}) =>{
         return VehicleController.edit(id, data);
+      },
+
+      addBudget: (_, {data}) =>{
+        return BudgetController.create(data);  
+      },
+      deleteBudget: (_, {id}) =>{
+        return BudgetController.delete(id);
+      },
+      modifyBudget: (_, {data, id}) =>{
+        return BudgetController.edit(id, data);
       },
     },
     //This code saves the scalar type os Date found in this thred

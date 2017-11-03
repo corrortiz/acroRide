@@ -73,6 +73,7 @@ const typeDefs = `
    }
 
    input UserInput {
+      _id: ID,
       name: String,
       organization: String,
       phones: [String],
@@ -88,6 +89,7 @@ const typeDefs = `
    }
 
    input VehicleInput{
+      _id: ID,
       name: String,
       passengers: Int,
       largeBags: Int,
@@ -132,6 +134,10 @@ const typeDefs = `
       addVehicle(data: VehicleInput): Vehicle
       modifyVehicle(data: VehicleInput, id: ID!): Vehicle
       deleteVehicle(id: ID!): Vehicle
+   
+      addBudget(data: BudgetInput): Budget
+      modifyBudget(data: BudgetInput, id: ID!): Budget
+      deleteBudget(id: ID!): Budget
    }
 `;
 
