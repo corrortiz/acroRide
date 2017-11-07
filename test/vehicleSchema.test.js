@@ -83,6 +83,29 @@ describe('VEHICLE SCHEMA CRUD', () => {
       });
    });
 
+   it('should delete a vehicle', (done) => {
+      chai.request(app)
+      .post('/graphql')
+      .send({'query': `
+      mutation deleteVehicle($id: ID!) {
+            deleteVehicle(id: $id) {
+              name
+              doors
+            }
+          }
+      `, 'variables': `
+         {
+            "id": "${vehicleID}"
+         }
+      `})
+      .end((err, res) => {
+         res.should.have.status(200);
+         res.should.be.json;
+         res.body.should.be.a('object');
+         done();
+      });
+   });
+   
    it('should create a vehicle', (done) => {
       chai.request(app)
       .post('/graphql')
@@ -124,26 +147,4 @@ describe('VEHICLE SCHEMA CRUD', () => {
       });
    });
 
-   it('should delete a vehicle', (done) => {
-      chai.request(app)
-      .post('/graphql')
-      .send({'query': `
-      mutation deleteVehicle($id: ID!) {
-            deleteVehicle(id: $id) {
-              name
-              doors
-            }
-          }
-      `, 'variables': `
-         {
-            "id": "${vehicleID}"
-         }
-      `})
-      .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
-      });
-   });
 });

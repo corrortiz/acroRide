@@ -6,7 +6,7 @@ const expecte = chai.expect;
 const BudgetController = require('../controllers/BudgetController');
 const Budget = require('../models/Budget');
 
-const { dummyBudget, budgetID, populateBudget, userId, vehicleID} = require('./testHelper');
+const { dummyBudget, budgetID, populateBudget, userId, vehicleID, variablesID} = require('./testHelper');
 //ID for the mock budget
 const {ObjectID} = require('mongodb');
 const newBudgetID = new ObjectID();
@@ -34,8 +34,8 @@ describe('BUDGET CONTROLLER CRUD TEST', () => {
    it('should find all budgets', (done) => {
       BudgetController.findAll().then((res)=>{
          res.should.be.a('array');
-         res[0].should.have.property('tollCost');
-         res[0].tollCost.should.equal(dummyBudget.tollCost);
+         res[0].should.have.property('distancia');
+         res[0].distancia.should.equal(dummyBudget.distancia);
          done();
       }).catch((err) => done(err));
    });
@@ -69,11 +69,17 @@ describe('BUDGET CONTROLLER CRUD TEST', () => {
    });
 
    it('should modify a budget find by a id', (done) => {
-      var newName = {destinoFinal: 'Alfredo Ortiz Muñoz'};
-      BudgetController.edit(budgetID, newName).then((res)=>{
+      var newVers = {
+         destinoFinal: 'Cancun',
+         Variables:{
+            _id: variablesID,
+            salary: 489
+         }
+      };
+      BudgetController.edit(budgetID, newVers).then((res)=>{
          res.should.be.a('object');
-         res.should.have.property('aprove');
-         res.aprove.should.equal(dummyBudget.aprove);
+         res.should.have.property('destinoFinal');
+         res.destinoFinal.should.equal(dummyBudget.destinoFinal);
          done();
       }).catch((err) => done(err));
    });

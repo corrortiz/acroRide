@@ -166,7 +166,6 @@ describe('BUDGET SCHEMA CRUD', () => {
               "destinoFinal": "Sonora",
               "tiempoAproximado": 2245.5,
               "distancia": 100.565,
-              "tollCost": 20.5,
               "tolls": [
                 "GDL",
                 "Marina",

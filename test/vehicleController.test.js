@@ -49,6 +49,15 @@ describe('VEHICLE CONTROLLER CRUD TEST', () => {
       }).catch((err) => done(err));
    });
    
+   it('should delete a vehicle find by a id', (done) => {
+      VehicleController.delete(vehicleID).then((res)=>{
+         res.should.be.a('object');
+         res.should.have.property('doors');
+         res.doors.should.equal(dummyVehicle.doors);
+         done();
+      }).catch((err) => done(err));
+   });
+   
    it('should modify a vehicle find by a id', (done) => {
       var newName = {name: 'Alfredo Ortiz Muñoz'};
       VehicleController.edit(vehicleID, newName).then((res)=>{
@@ -59,12 +68,4 @@ describe('VEHICLE CONTROLLER CRUD TEST', () => {
       }).catch((err) => done(err));
    });
 
-   it('should delete a vehicle find by a id', (done) => {
-      VehicleController.delete(vehicleID).then((res)=>{
-         res.should.be.a('object');
-         res.should.have.property('doors');
-         res.doors.should.equal(dummyVehicle.doors);
-         done();
-      }).catch((err) => done(err));
-   });
 });

@@ -61,6 +61,19 @@ const typeDefs = `
       en: String
    }
 
+   type Variables {
+      _id: ID!,
+      viatics: Float,
+      foods: Float,
+      salary: Float,
+      hotel: Float,
+      gas: Float,
+      floorRight: Float,
+      tollCost: Float,
+      guide: Float,
+      lunchBox: Float
+   }
+
    type Budget {
       _id: ID!
       finalTotalCost: FinalTotalCost,
@@ -69,12 +82,12 @@ const typeDefs = `
       destinoFinal: String,
       tiempoAproximado: Float,
       distancia: Float,
-      tollCost: Float,
       tolls: [String],
       budgetDate: Date,
       aprove: Boolean,
       User: User,
       Vehicle: Vehicle
+      Variables: Variables
    }
 
    type Travel {
@@ -131,6 +144,19 @@ const typeDefs = `
       en: String
    }
 
+   input VariablesInput {
+      _id: ID,
+      viatics: Float,
+      foods: Float,
+      salary: Float,
+      hotel: Float,
+      gas: Float,
+      floorRight: Float,
+      tollCost: Float,
+      guide: Float,
+      lunchBox: Float
+   }
+
    input BudgetInput {
       finalTotalCost: FinalTotalCostInput,
       budgetTotalCost: BudgetTotalCostInput,
@@ -138,12 +164,12 @@ const typeDefs = `
       destinoFinal: String,
       tiempoAproximado: Float,
       distancia: Float,
-      tollCost: Float,
       tolls: [String],
       budgetDate: Date,
       aprove: Boolean,
       User: UserInput,
-      Vehicle: VehicleInput
+      Vehicle: VehicleInput,
+      Variables: VariablesInput
    }
 
    input TravelInput {

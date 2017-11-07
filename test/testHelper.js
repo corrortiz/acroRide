@@ -9,11 +9,13 @@ const Users = require('../models/Users');
 const Vehicle = require('../models/Vehicle');
 const Budget = require('../models/Budget');
 const Travel = require('../models/Travel');
+const Variables = require('../models/Variables');
 
 let userId = new ObjectID();
 let vehicleID = new ObjectID();
 let budgetID = new ObjectID();
 let travelID = new ObjectID();
+let variablesID = new ObjectID();
 
 const dummyUser = {
     _id: userId,
@@ -42,6 +44,19 @@ const dummyVehicle = {
     }
 };
 
+const dummyVariables = {
+    _id: vehicleID,
+    viatics: 10,
+    foods: 20,
+    salary: 30,
+    hotel: 40,
+    gas: 50,
+    floorRight: 60,
+    tollCost: 70,
+    guide: 80,
+    lunchBox: 90
+};
+
 const dummyBudget = {
     _id: budgetID,
     finalTotalCost: {
@@ -56,12 +71,12 @@ const dummyBudget = {
     destinoFinal: "Puebla",
     tiempoAproximado: 250,
     distancia: 150,
-    tollCost: 100.00,
     tolls: ["minantla", "puebla"],
     budgetDate: moment().format(),
     aprove: true,
     User: dummyUser,
-    Vehicle: dummyVehicle
+    Vehicle: dummyVehicle,
+    Variables: dummyVariables
 };
 
 const dummyTravel = {
@@ -135,5 +150,6 @@ module.exports = {
     populateBudget,
     dummyTravel,
     travelID,
-    populateTravel
+    populateTravel,
+    variablesID
 };
