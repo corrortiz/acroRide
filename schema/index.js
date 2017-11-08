@@ -7,6 +7,7 @@ const typeDefs = `
    type Query {
       allUsers: [User]
       aUser(id: ID!): User
+      auhtUser(id: ID!, password: String): User
 
       allVehicles: [Vehicle]
       aVehicle(id: ID!): Vehicle

@@ -11,6 +11,9 @@ module.exports = {
       aUser: (_, {id}) => {
         return UsersController.find(id);
       },
+      auhtUser : (_, {id, password}) => {
+        return UsersController.auhtUser(id, password);
+      },
 
       allVehicles: () => {
          return VehicleController.findAll();  
