@@ -20,11 +20,11 @@ let variablesID = new ObjectID();
 const dummyUser = {
     _id: userId,
     name: "Alejandro Ortiz Corro",
-    orgnaization: "AO HyS",
+    orgnaization: "AO HyS es lo mejor",
     phones: ["2299020825", "2292605547"],
     emails: ["a.ortizcrr@gmail.com", "corrortiz@outlook.com"],
     type: "ADMIN",
-    password: "2106",
+    password: "calixio2106",
     percentaje: "100"
 };
 

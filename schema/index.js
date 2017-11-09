@@ -191,6 +191,7 @@ const typeDefs = `
       addUser(data: UserInput): User
       modifyUser(data: UserInput, id: ID!): User
       deleteUser(id: ID!): User
+      login(id: ID!, password: String): String!
       
       addVehicle(data: VehicleInput): Vehicle
       modifyVehicle(data: VehicleInput, id: ID!): Vehicle

@@ -85,6 +85,30 @@ describe('USERS SCHEMA CRUD', () => {
       });
    });
 
+   it('should delete a user', (done) => {
+      chai.request(app)
+      .post('/graphql')
+      .send({'query': `
+         mutation deleteUser($id: ID!) {
+            deleteUser(id: $id) {
+            name
+            organization
+            type
+            }
+         }
+      `, 'variables': `
+         {
+            "id": "${userId}"
+         }
+      `})
+      .end((err, res) => {
+         res.should.have.status(200);
+         res.should.be.json;
+         res.body.should.be.a('object');
+         done();
+      });
+   });
+   
    it('should create a user', (done) => {
       chai.request(app)
       .post('/graphql')
@@ -121,27 +145,4 @@ describe('USERS SCHEMA CRUD', () => {
       });
    });
 
-   it('should delete a user', (done) => {
-      chai.request(app)
-      .post('/graphql')
-      .send({'query': `
-         mutation deleteUser($id: ID!) {
-            deleteUser(id: $id) {
-            name
-            organization
-            type
-            }
-         }
-      `, 'variables': `
-         {
-            "id": "${userId}"
-         }
-      `})
-      .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
-      });
-   });
 });

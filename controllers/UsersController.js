@@ -1,5 +1,8 @@
 const Users = require('../models/Users');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const _ = require('lodash');
+
 
 module.exports = {
    create(userProps){
@@ -22,10 +25,30 @@ module.exports = {
        return Users.findById({_id}).then((user)=>{
          return bcrypt.compare(password, user.password).then((err, isMatch) => {
             return new Promise((resolve, reject)=>{
-               if(isMatch == false){ reject("Invalid credentials"); }
+               if(isMatch === false){ reject("Invalid credentials"); }
                resolve(user);
             }).catch(err=>console.warn(err));
           });
       });
    },
+   login(_id, password){
+    return Users.findById({_id}).then((user)=>{
+      return bcrypt.compare(password, user.password).then((isMatch) => {
+         return new Promise((resolve, reject)=>{
+            if(isMatch === false){ reject("Invalid credentials"); }
+            
+            const token = jwt.sign(
+              {
+                user: _.pick(user, ['_id', 'name', 'organization']),
+              },
+              process.env.SECRET,
+              {
+                expiresIn: '30d',
+              }
+            );
+            resolve(token);
+         }).catch(err=>console.warn(err));
+       });
+   });
+},
 };

@@ -5,8 +5,9 @@ const TravelController = require('./../controllers/TravelController');
 
 module.exports = {
    Query: {
-      allUsers: () => {
-         return UsersController.findAll();  
+      allUsers: (_, args, {user}) => {
+        console.log(user); 
+        return UsersController.findAll();  
       },
       aUser: (_, {id}) => {
         return UsersController.find(id);
@@ -57,6 +58,9 @@ module.exports = {
       },
       modifyUser: (_, {data, id}) =>{
         return UsersController.edit(id, data);
+      },
+      login: (_, {id, password}) =>{
+        return UsersController.login(id, password);
       },
 
       addVehicle: (_, {data}) =>{
