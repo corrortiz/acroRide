@@ -6,7 +6,6 @@ const TravelController = require('./../controllers/TravelController');
 module.exports = {
    Query: {
       allUsers: (_, args, {user}) => {
-        console.log(user); 
         return UsersController.findAll();  
       },
       aUser: (_, {id}) => {
@@ -20,7 +19,7 @@ module.exports = {
          return VehicleController.findAll();  
       },
       aVehicle: (_, {id}) => {
-        return VehicleController.find(id);
+      return VehicleController.find(id);
       },
 
       allBudgets: () => {
@@ -48,7 +47,7 @@ module.exports = {
       aTravel: (_, {id}) => {
         return TravelController.find(id);
       }, 
-   },
+    },
    Mutation: {
       addUser: (_, {data}) =>{
          return UsersController.create(data);  
