@@ -11,8 +11,8 @@ const VehicleSchema = new Schema({
   status: Boolean,
   imagesUrls: [String],
   description: {
-     es: String,
-     en: String
+    es: String,
+    en: String
   }
 });
 
