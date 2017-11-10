@@ -16,4 +16,4 @@ const aUserVariable = (id) => `
 }
 `;
 
-module.exports = {aUser, aUserVariable};
+module.exports = { aUser, aUserVariable };

@@ -5,16 +5,17 @@ const should = chai.should();
 const expecte = chai.expect;
 chai.use(chaiHttp);
 //Helpers
-const {app} = require('./../server.js');
-const {vehicleID, populateVehicle} = require('./testHelper');
+const { app } = require('./../server.js');
+const { vehicleID, populateVehicle } = require('./testHelper');
 
 beforeEach(populateVehicle);
 
 describe('VEHICLE SCHEMA CRUD', () => {
-   it('should return array of vehicles', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+  it('should return array of vehicles', (done) => {
+    chai.request(app)
+      .post('/graphql')
+      .send({
+        'query': `
          {
             allVehicles {
               name
@@ -22,18 +23,19 @@ describe('VEHICLE SCHEMA CRUD', () => {
             }
           }
          `})
-            .end((err, res) => {
-               res.should.have.status(200);
-               res.should.be.json;
-               res.body.should.be.a('object');
-               done();
-            });
-   });
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
-   it('should return a vehicle', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+  it('should return a vehicle', (done) => {
+    chai.request(app)
+      .post('/graphql')
+      .send({
+        'query': `
          query aVehicle($id: ID!) {
             aVehicle(id: $id) {
               doors
@@ -46,18 +48,19 @@ describe('VEHICLE SCHEMA CRUD', () => {
                "id": "${vehicleID}"
             }
          `})
-         .end((err, res) => {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('object');
-            done();
-         });
-   });
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
-   it('should modify a vehicle', (done) => {
-      chai.request(app)
+  it('should modify a vehicle', (done) => {
+    chai.request(app)
       .post('/graphql')
-      .send({'query': `
+      .send({
+        'query': `
       mutation modifyVehicle($vehicle: VehicleInput, $id: ID!) {
             modifyVehicle(data: $vehicle, id: $id) {
               name
@@ -76,17 +79,18 @@ describe('VEHICLE SCHEMA CRUD', () => {
          }
       `})
       .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
-   });
+  });
 
-   it('should delete a vehicle', (done) => {
-      chai.request(app)
+  it('should delete a vehicle', (done) => {
+    chai.request(app)
       .post('/graphql')
-      .send({'query': `
+      .send({
+        'query': `
       mutation deleteVehicle($id: ID!) {
             deleteVehicle(id: $id) {
               name
@@ -99,17 +103,18 @@ describe('VEHICLE SCHEMA CRUD', () => {
          }
       `})
       .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
-   });
-   
-   it('should create a vehicle', (done) => {
-      chai.request(app)
+  });
+
+  it('should create a vehicle', (done) => {
+    chai.request(app)
       .post('/graphql')
-      .send({'query': `
+      .send({
+        'query': `
       mutation addVehicle($vehicle: VehicleInput) {
             addVehicle(data: $vehicle) {
               _id
@@ -140,11 +145,11 @@ describe('VEHICLE SCHEMA CRUD', () => {
           }
       `})
       .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
-   });
+  });
 
 });

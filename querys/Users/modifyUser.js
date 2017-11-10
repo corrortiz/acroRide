@@ -19,4 +19,4 @@ const modifyUserVariables = (id) => `
  }
 `;
 
-module.exports = {modifyUserVariables, modifyUser};
+module.exports = { modifyUserVariables, modifyUser };

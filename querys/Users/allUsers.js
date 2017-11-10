@@ -7,4 +7,4 @@ query allUsers{
 }
 `;
 
-module.exports = {allUsers};
+module.exports = { allUsers };

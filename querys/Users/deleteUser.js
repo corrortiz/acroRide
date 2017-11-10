@@ -15,4 +15,4 @@ const deleteUserVariable = (id) => `
 }
 `;
 
-module.exports = {deleteUser, deleteUserVariable};
+module.exports = { deleteUser, deleteUserVariable };

@@ -12,4 +12,4 @@ const addUserVariables = (user) => `
 }
 `;
 
-module.exports = {addUser, addUserVariables};
+module.exports = { addUser, addUserVariables };

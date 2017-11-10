@@ -5,7 +5,7 @@ const should = chai.should();
 const expecte = chai.expect;
 chai.use(chaiHttp);
 
-const {app} = require('./../server.js');
+const { app } = require('./../server.js');
 
 describe('SERVER', () => {
     it('GET / should return 404 not found', (done) => {
@@ -15,7 +15,7 @@ describe('SERVER', () => {
                 should.exist(res);
                 res.should.be.an('object');
                 res.should.have.status(404);
-                done();    
+                done();
             });
     });
 

@@ -5,16 +5,17 @@ const should = chai.should();
 const expecte = chai.expect;
 chai.use(chaiHttp);
 //Helpers
-const {app} = require('./../server.js');
-const {travelID, populateTravel, userId, vehicleID} = require('./testHelper');
+const { app } = require('./../server.js');
+const { travelID, populateTravel, userId, vehicleID } = require('./testHelper');
 
 beforeEach(populateTravel);
 
 describe('TRAVEL SCHEMA CRUD', () => {
-   it('should return array of travels', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+  it('should return array of travels', (done) => {
+    chai.request(app)
+      .post('/graphql')
+      .send({
+        'query': `
           query allTravels{
             allTravels{
               tolls
@@ -22,18 +23,19 @@ describe('TRAVEL SCHEMA CRUD', () => {
             }
           }
          `})
-            .end((err, res) => {
-               res.should.have.status(200);
-               res.should.be.json;
-               res.body.should.be.a('object');
-               done();
-            });
-   });
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
-   it('should return a travel', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+  it('should return a travel', (done) => {
+    chai.request(app)
+      .post('/graphql')
+      .send({
+        'query': `
           query aTravel($id:ID!){
             aTravel(id: $id){
               tolls
@@ -45,18 +47,19 @@ describe('TRAVEL SCHEMA CRUD', () => {
                "id": "${travelID}"
             }
          `})
-         .end((err, res) => {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('object');
-            done();
-         });
-   });
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
-   it('should return a array of travels find by a User ID', (done) => {
+  it('should return a array of travels find by a User ID', (done) => {
     chai.request(app)
-       .post('/graphql')
-       .send({'query': `
+      .post('/graphql')
+      .send({
+        'query': `
         query allTravelsByUser($userId:ID!){
           allTravelsByUser(userId: $userId){
             tolls
@@ -68,18 +71,19 @@ describe('TRAVEL SCHEMA CRUD', () => {
           "userId": "${userId}"
         }
        `})
-       .end((err, res) => {
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.should.be.a('object');
-          done();
-       });
-    });
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
-    it('should return a array of travels find by a Vehicle ID', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+  it('should return a array of travels find by a Vehicle ID', (done) => {
+    chai.request(app)
+      .post('/graphql')
+      .send({
+        'query': `
           query allTravelsByVehicle($vehicleId:ID!){
             allTravelsByVehicle(vehicleId: $vehicleId){
               tolls
@@ -91,18 +95,19 @@ describe('TRAVEL SCHEMA CRUD', () => {
             "vehicleId": "${vehicleID}"
           }
          `})
-         .end((err, res) => {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('object');
-            done();
-         });
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
+  });
 
-   it('should modify a travel', (done) => {
-      chai.request(app)
+  it('should modify a travel', (done) => {
+    chai.request(app)
       .post('/graphql')
-      .send({'query': `
+      .send({
+        'query': `
         mutation modifyTravel($travel: TravelInput, $id:ID!) {
           modifyTravel(data: $travel, id: $id) {
             tiempoAproximado
@@ -119,17 +124,18 @@ describe('TRAVEL SCHEMA CRUD', () => {
          }
       `})
       .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
-   });
+  });
 
-   it('should create a travel', (done) => {
-      chai.request(app)
+  it('should create a travel', (done) => {
+    chai.request(app)
       .post('/graphql')
-      .send({'query': `
+      .send({
+        'query': `
         mutation addTravel($travel: TravelInput) {
           addTravel(data: $travel) {
             _id
@@ -169,17 +175,18 @@ describe('TRAVEL SCHEMA CRUD', () => {
           }
       `})
       .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
-   });
+  });
 
-   it('should delete a travel', (done) => {
-      chai.request(app)
+  it('should delete a travel', (done) => {
+    chai.request(app)
       .post('/graphql')
-      .send({'query': `
+      .send({
+        'query': `
         mutation deleteTravel($id:ID!) {
           deleteTravel(id: $id) {
             tiempoAproximado
@@ -192,10 +199,10 @@ describe('TRAVEL SCHEMA CRUD', () => {
          }
       `})
       .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        done();
       });
-   });
+  });
 });
