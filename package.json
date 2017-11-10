@@ -1,5 +1,5 @@
 {
-  "name": "Acroride_graphQL_API",
+  "name": "AcrorideGraphQLAPI",
   "version": "1.0.0.SNAPSHOP",
   "description": "API for acrodide web app",
   "engines": {
@@ -9,9 +9,9 @@
   "repository": "www.acroride.com",
   "author": "AO HyS .- Alejandro Ortiz Corro",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "nodemon --exec \"mocha\" -R nyan"
   },
   "dependencies": {
