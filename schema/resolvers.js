@@ -26,7 +26,7 @@ module.exports = {
       return BudgetController.findAll();
     },
     allBudgetsByUser: (_, { userId }, {dataloaders: {budgetLoader}}) => {
-      return budgetLoader.load(userId);
+      return budgetLoader.load(userId);//Use load or loadMany to see results
     },
     allBudgetsByVehicle: (_, { vehicleId }) => {
       return BudgetController.findAllByVehicle(vehicleId);

@@ -30,10 +30,12 @@ const addUser = (req) => {
     req.next();
 };
 
-
+//Object whit the cache function
 const budgetLoader = {
     budgetLoader : new DataLoader(
+        //wrap the function in a promise and a map
         keys => Promise.all(keys.map(BudgetController.findAllByUser)),
+        //config object to standarize ids in mongoDB
         { cacheKeyFn: key => key.toString() }
     )
 };
@@ -47,7 +49,7 @@ app.use(
         schema,
         context: {
             user: req.user,
-            dataloaders: budgetLoader
+            dataloaders: budgetLoader //Pas te loader to the contex
         }
     }))
 );
