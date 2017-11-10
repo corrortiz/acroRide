@@ -5,7 +5,7 @@ const TravelController = require('./../controllers/TravelController');
 
 module.exports = {
   Query: {
-    allUsers: (_, args, { user }) => {
+    allUsers: () => {
       return UsersController.findAll();
     },
     aUser: (_, { id }) => {
@@ -26,7 +26,7 @@ module.exports = {
       return BudgetController.findAll();
     },
     allBudgetsByUser: (_, { userId }, { dataloaders: { budgetLoader } }) => {
-      return budgetLoader.load(userId);//Use load or loadMany to see results
+      return budgetLoader.load(userId);// Use load or loadMany to see results
     },
     allBudgetsByVehicle: (_, { vehicleId }) => {
       return BudgetController.findAllByVehicle(vehicleId);
@@ -92,9 +92,9 @@ module.exports = {
       return TravelController.edit(id, data);
     },
   },
-  //This code saves the scalar type os Date found in this thred
-  //https://github.com/graphql/graphql-js/issues/497
-  //Convers mongo Date to GraphQL timeStamp
+  /* This code saves the scalar type os Date found in this thred
+  https://github.com/graphql/graphql-js/issues/497
+  Convers mongo Date to GraphQL timeStamp */
   Date: {
     __parseValue(value) {
       return new Date(value); // value from the client
@@ -103,10 +103,12 @@ module.exports = {
       return value.getTime(); // value sent to the client
     },
     __parseLiteral(ast) {
+      /* eslint-disable */
       if (ast.kind === Kind.INT) {
         return parseInt(ast.value, 10); // ast value is always in string format
       }
+      /* eslint-enable */
       return null;
-    }
+    },
   },
 };
