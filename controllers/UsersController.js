@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
-
 module.exports = {
   create(userProps) {
     const user = new Users(userProps);

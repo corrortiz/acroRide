@@ -5,16 +5,17 @@ const should = chai.should();
 const expecte = chai.expect;
 chai.use(chaiHttp);
 //Helpers
-const {app} = require('./../server.js');
-const {userId, dummyUser, populateUser} = require('./testHelper');
+const { app } = require('./../server.js');
+const { userId, dummyUser, populateUser } = require('./testHelper');
 
 beforeEach(populateUser);
 
 describe('USERS SCHEMA CRUD', () => {
-   it('should return array of users', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+      it('should return array of users', (done) => {
+            chai.request(app)
+                  .post('/graphql')
+                  .send({
+                        'query': `
             query allUsers{
                allUsers{
                   name
@@ -22,18 +23,19 @@ describe('USERS SCHEMA CRUD', () => {
                }
             }
          `})
-            .end((err, res) => {
-               res.should.have.status(200);
-               res.should.be.json;
-               res.body.should.be.a('object');
-               done();
-            });
-   });
+                  .end((err, res) => {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        done();
+                  });
+      });
 
-   it('should return a user', (done) => {
-      chai.request(app)
-         .post('/graphql')
-         .send({'query': `
+      it('should return a user', (done) => {
+            chai.request(app)
+                  .post('/graphql')
+                  .send({
+                        'query': `
             query aUser($id:ID!){
                aUser(id: $id){
                name
@@ -48,18 +50,19 @@ describe('USERS SCHEMA CRUD', () => {
                "id": "${userId}"
             }
          `})
-         .end((err, res) => {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.be.a('object');
-            done();
-         });
-   });
+                  .end((err, res) => {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        done();
+                  });
+      });
 
-   it('should modify a user', (done) => {
-      chai.request(app)
-      .post('/graphql')
-      .send({'query': `
+      it('should modify a user', (done) => {
+            chai.request(app)
+                  .post('/graphql')
+                  .send({
+                        'query': `
          mutation modifyUser($user: UserInput, $id: ID!) {
             modifyUser(data: $user, id: $id) {
             name
@@ -77,18 +80,19 @@ describe('USERS SCHEMA CRUD', () => {
             "id": "${userId}"
          }
       `})
-      .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+                  .end((err, res) => {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        done();
+                  });
       });
-   });
 
-   it('should delete a user', (done) => {
-      chai.request(app)
-      .post('/graphql')
-      .send({'query': `
+      it('should delete a user', (done) => {
+            chai.request(app)
+                  .post('/graphql')
+                  .send({
+                        'query': `
          mutation deleteUser($id: ID!) {
             deleteUser(id: $id) {
             name
@@ -101,18 +105,19 @@ describe('USERS SCHEMA CRUD', () => {
             "id": "${userId}"
          }
       `})
-      .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+                  .end((err, res) => {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        done();
+                  });
       });
-   });
-   
-   it('should create a user', (done) => {
-      chai.request(app)
-      .post('/graphql')
-      .send({'query': `
+
+      it('should create a user', (done) => {
+            chai.request(app)
+                  .post('/graphql')
+                  .send({
+                        'query': `
          mutation addUser($user: UserInput) {
             addUser(data: $user) {
             _id
@@ -137,12 +142,12 @@ describe('USERS SCHEMA CRUD', () => {
             }
          }
       `})
-      .end((err, res) => {
-         res.should.have.status(200);
-         res.should.be.json;
-         res.body.should.be.a('object');
-         done();
+                  .end((err, res) => {
+                        res.should.have.status(200);
+                        res.should.be.json;
+                        res.body.should.be.a('object');
+                        done();
+                  });
       });
-   });
 
 });
