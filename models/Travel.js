@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const TravelSchema = new Schema({
   finalTotalCost: {
     es: String,
-    en: String
+    en: String,
   },
   budgetTotalCost: {
     es: String,
-    en: String
+    en: String,
   },
   destinoInicial: String,
   destinoFinal: String,
@@ -19,12 +19,12 @@ const TravelSchema = new Schema({
   actualDate: Date,
   User: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'users',
   },
   Vehicle: {
     type: Schema.Types.ObjectId,
-    ref: 'vehicle'
-  }
+    ref: 'vehicle',
+  },
 });
 
 const Travel = mongoose.model('travel', TravelSchema);

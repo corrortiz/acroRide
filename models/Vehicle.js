@@ -12,8 +12,8 @@ const VehicleSchema = new Schema({
   imagesUrls: [String],
   description: {
     es: String,
-    en: String
-  }
+    en: String,
+  },
 });
 
 const Vehicle = mongoose.model('vehicle', VehicleSchema);
